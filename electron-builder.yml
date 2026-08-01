@@ -1,0 +1,72 @@
+# electron-builder configuration for MeshDesk
+#
+# Release pipeline:
+#   npm run build:pack    -> local packaged app (no publish)
+#   npm run build:release -> package + upload to GitHub Releases (needs
+#                            GH_UPDATE_OWNER, GH_UPDATE_REPO and a
+#                            GH_TOKEN / GITHUB_TOKEN with repo access)
+
+appId: com.meshdesk.app
+productName: MeshDesk
+copyright: Copyright © 2026 MeshDesk
+
+directories:
+  output: dist
+  buildResources: build
+
+# Artifact naming: MeshDesk-1.0.0-win-x64.exe, MeshDesk-1.0.0-mac-x64.dmg,
+# MeshDesk-1.0.0-linux-x64.AppImage
+artifactName: ${productName}-${version}-${os}-${arch}.${ext}
+
+# GitHub Releases publish target. Owner/repo are injected from the environment
+# (the same variables the runtime updater in electron/updater.js reads), so
+# forks and CI can override without editing config. Upload auth comes from the
+# standard GH_TOKEN / GITHUB_TOKEN env var.
+publish:
+  provider: github
+  owner: ${env.GH_UPDATE_OWNER}
+  repo: ${env.GH_UPDATE_REPO}
+
+files:
+  - electron/**/*
+  - workers/**/*
+  - src/shared/**/*
+  - renderer/dist/**/*
+  - package.json
+
+# The P2P worker is spawned by pear-runtime (bare process) and its
+# native/prebuilt modules cannot load from inside asar, so worker files and
+# node_modules stay unpacked on disk (mirrors the forge asar.unpack rule).
+asarUnpack:
+  - '**/workers/**'
+  - '**/node_modules/**'
+
+# Prebuilt bare-runtime modules must not be rebuilt by electron-builder.
+npmRebuild: false
+
+win:
+  target:
+    - nsis
+  icon: build/icon.ico
+
+nsis:
+  # Assisted (non-one-click) installer, per-user: installs into
+  # %LOCALAPPDATA%\Programs without admin elevation.
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  artifactName: ${productName}-Setup-${version}.${ext}
+
+mac:
+  target:
+    - dmg
+  category: public.app-category.utilities
+  icon: build/icon.icns
+
+linux:
+  target:
+    - AppImage
+  category: Network
+  icon: build/icon.png

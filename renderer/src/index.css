@@ -1,0 +1,301 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep Slate & Indigo — light (OKLCH source converted to sRGB components) */
+    --background: 250 250 250;
+    --foreground: 15 23 43;
+    --card: 255 255 255;
+    --card-foreground: 15 23 43;
+    --popover: 255 255 255;
+    --popover-foreground: 15 23 43;
+    --primary: 79 57 246;
+    --primary-foreground: 255 255 255;
+    --secondary: 226 232 240;
+    --secondary-foreground: 15 23 43;
+    --muted: 226 232 240;
+    --muted-foreground: 113 113 123;
+    --accent: 226 232 240;
+    --accent-foreground: 15 23 43;
+    --destructive: 231 0 11;
+    --destructive-foreground: 255 255 255;
+    --border: 228 228 231;
+    --input: 228 228 231;
+    --ring: 159 159 169;
+    --radius: 0.5rem;
+
+    --chart-1: 245 73 0;
+    --chart-2: 0 150 137;
+    --chart-3: 16 78 100;
+    --chart-4: 255 185 0;
+    --chart-5: 254 154 0;
+
+    --sidebar: 229 235 244;
+    --sidebar-foreground: 15 23 43;
+    --sidebar-muted: 199 206 216;
+    --sidebar-border: 228 228 231;
+
+    --status-online: 49 170 64;
+    --status-away: 237 153 14;
+    --status-busy: 230 43 52;
+    --status-offline: 122 128 141;
+
+    --success: 49 170 64;
+    --warning: 237 153 14;
+    --danger: 230 43 52;
+  }
+
+  .dark {
+    /* Deep Slate & Indigo — dark (OKLCH source converted to sRGB components) */
+    --background: 2 6 24;
+    --foreground: 248 250 252;
+    --card: 15 23 43;
+    --card-foreground: 248 250 252;
+    --popover: 15 23 43;
+    --popover-foreground: 248 250 252;
+    --primary: 97 95 255;
+    --primary-foreground: 248 250 252;
+    --secondary: 26 37 63;
+    --secondary-foreground: 248 250 252;
+    --muted: 26 37 63;
+    --muted-foreground: 159 159 169;
+    --accent: 26 37 63;
+    --accent-foreground: 248 250 252;
+    --destructive: 130 24 26;
+    --destructive-foreground: 255 255 255;
+    --border: 26 37 63;
+    --input: 26 37 63;
+    --ring: 113 113 123;
+
+    --chart-1: 20 71 230;
+    --chart-2: 0 188 125;
+    --chart-3: 254 154 0;
+    --chart-4: 173 70 255;
+    --chart-5: 255 32 86;
+
+    --sidebar: 6 12 29;
+    --sidebar-foreground: 248 250 252;
+    --sidebar-muted: 16 26 47;
+    --sidebar-border: 26 37 63;
+
+    --status-online: 69 186 80;
+    --status-away: 247 162 36;
+    --status-busy: 238 52 59;
+    --status-offline: 122 128 141;
+
+    --success: 69 186 80;
+    --warning: 247 162 36;
+    --danger: 238 52 59;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    outline-color: rgb(var(--ring) / 0.5);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    overflow: hidden;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    @apply text-primary;
+    background: rgb(var(--primary) / 0.25);
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full transition-colors;
+    /* Pure neutral gray — no hue cast (avoids green/yellow fringing perception) */
+    background: rgb(128 128 140 / 0.35);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(128 128 140 / 0.55);
+  }
+}
+
+@layer utilities {
+  .drag-region {
+    -webkit-app-region: drag;
+  }
+
+  .no-drag {
+    -webkit-app-region: no-drag;
+  }
+
+  .glass-surface {
+    background: rgb(var(--sidebar) / 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(var(--border) / 0.6);
+  }
+
+  .glass-card {
+    background: rgb(var(--card) / 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(var(--border) / 0.6);
+  }
+
+  .glass-card-interactive {
+    background: rgb(var(--card) / 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(var(--border) / 0.6);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .glass-card-interactive:hover {
+    border-color: rgb(var(--primary) / 0.45);
+    box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.25);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.45);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 24px -4px rgba(147, 51, 234, 0.45);
+  }
+
+  .glow-success {
+    box-shadow: 0 0 20px -4px rgba(34, 197, 94, 0.45);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-brand {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  }
+
+  .gradient-border {
+    position: relative;
+    border-radius: inherit;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(168, 85, 247, 0.5));
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-up {
+  animation: scale-up 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/*
+ * Modal entrance animation. Unlike the generic scale-up, this preserves the
+ * -translate-x-1/2 -translate-y-1/2 centering transform Tailwind applies to
+ * Dialog.Content. Without it, the animation's `transform: scale(...)` would
+ * overwrite the translate after finishing, dropping the modal into the
+ * bottom-right quadrant of the viewport.
+ */
+@keyframes modal-scale-up {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.animate-modal-scale-up {
+  animation: modal-scale-up 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

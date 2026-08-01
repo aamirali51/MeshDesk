@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+# GITHUB_TOKEN needs write access to create/update the GitHub Release.
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & publish (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+
+    env:
+      # electron-builder publish config reads these (electron-builder.yml);
+      # mapped automatically from the repo so no manual secrets are needed.
+      GH_UPDATE_OWNER: ${{ github.repository_owner }}
+      GH_UPDATE_REPO: ${{ github.event.repository.name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build & publish
+        run: npm run build:release
+        env:
+          # Default token can create releases + upload artifacts in this repo.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # No codesigning certs in CI: don't attempt autodiscovery (macOS).
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'

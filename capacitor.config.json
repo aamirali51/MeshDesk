@@ -1,0 +1,8 @@
+{
+  "appId": "com.p2p.app",
+  "appName": "Application",
+  "webDir": "renderer/dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}
