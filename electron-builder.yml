@@ -32,10 +32,12 @@ files:
   - package.json
 
 # The P2P worker is spawned by pear-runtime (bare process) and its
-# native/prebuilt modules cannot load from inside asar, so worker files and
-# node_modules stay unpacked on disk (mirrors the forge asar.unpack rule).
+# native/prebuilt modules cannot load from inside asar, so worker files, the
+# shared protocol module it imports, and node_modules stay unpacked on disk
+# (mirrors the forge asar.unpack rule).
 asarUnpack:
   - '**/workers/**'
+  - '**/src/shared/**'
   - '**/node_modules/**'
 
 # Prebuilt bare-runtime modules must not be rebuilt by electron-builder.

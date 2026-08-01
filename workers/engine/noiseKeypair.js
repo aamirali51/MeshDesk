@@ -17,6 +17,12 @@ const KEYPAIR_FILE = 'noise-keypair.json'
 // Load the saved keypair, or generate + persist a new one on first boot.
 // Synchronous: the swarm is constructed at module load, before bootstrap.
 function loadOrCreateNoiseKeypair(storageDir) {
+  // The storage directory is created by the corestore later in bootstrap;
+  // ensure it exists now so the keypair can be persisted on the very first
+  // boot (otherwise a fresh key is generated every boot until then).
+  try {
+    fs.mkdirSync(storageDir, { recursive: true })
+  } catch {}
   const keyFile = path.join(storageDir, KEYPAIR_FILE)
   try {
     const saved = JSON.parse(fs.readFileSync(keyFile, 'utf8'))
