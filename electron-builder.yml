@@ -18,14 +18,11 @@ directories:
 # MeshDesk-1.0.0-linux-x64.AppImage
 artifactName: ${productName}-${version}-${os}-${arch}.${ext}
 
-# GitHub Releases publish target. Owner/repo are injected from the environment
-# (the same variables the runtime updater in electron/updater.js reads), so
-# forks and CI can override without editing config. Upload auth comes from the
-# standard GH_TOKEN / GITHUB_TOKEN env var.
+# GitHub Releases publish target. Owner/repo are inferred from the
+# `repository` field in package.json, so no env vars are needed to build
+# locally; upload auth comes from the standard GH_TOKEN / GITHUB_TOKEN.
 publish:
   provider: github
-  owner: ${env.GH_UPDATE_OWNER}
-  repo: ${env.GH_UPDATE_REPO}
 
 files:
   - electron/**/*
