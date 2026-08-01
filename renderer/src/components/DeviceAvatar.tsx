@@ -1,13 +1,11 @@
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { Monitor, Apple, Terminal, Smartphone } from 'lucide-react'
+import { Monitor, Apple, Terminal } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const OS_ICONS: Record<string, typeof Monitor> = {
   windows: Monitor,
   macos: Apple,
-  linux: Terminal,
-  android: Smartphone,
-  ios: Smartphone
+  linux: Terminal
 }
 
 interface DeviceAvatarProps {

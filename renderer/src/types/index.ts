@@ -22,7 +22,7 @@ export type NetworkType = 'direct_lan' | 'p2p_dht' | 'relay'
 export interface Device {
   id: string
   name: string
-  os: 'windows' | 'macos' | 'linux' | 'android' | 'ios'
+  os: 'windows' | 'macos' | 'linux'
   osVersion: string
   avatar: string
   isTrusted: boolean

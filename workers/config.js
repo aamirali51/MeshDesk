@@ -21,7 +21,7 @@ function createConfig() {
     try {
       const hostname = os.hostname()
       const platform = os.platform()
-      const map = { win32: 'Windows', darwin: 'macOS', linux: 'Linux', android: 'Android' }
+      const map = { win32: 'Windows', darwin: 'macOS', linux: 'Linux' }
 
       let name = hostname || 'Unknown Device'
       const match = (STORAGE_DIR || '').match(/p2p-instance-(\d+)/)

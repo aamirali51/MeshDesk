@@ -51,9 +51,6 @@ AGENTS.md
 .opencode/
 skills-lock.json
 
-# Mobile scaffolding (Capacitor) — not part of the desktop release
-android/
-
 # Internal markdown docs; README stays public
 *.md
 !README.md

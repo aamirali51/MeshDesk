@@ -16,13 +16,11 @@ let packagerConfig = {
   ignore: [
     /^[/\\]data([/\\]|$)/,
     /^[/\\]\.p2p-test-profile([/\\]|$)/,
-    /^[/\\]android([/\\]|$)/,
     /^[/\\]out([/\\]|$)/,
     /^[/\\]\.git([/\\]|$)/,
     /^[/\\]\.gemini([/\\]|$)/,
     /^[/\\]renderer[/\\]src([/\\]|$)/,
-    /[/\\]node_modules[/\\]\.cache([/\\]|$)/,
-    /[/\\]node_modules[/\\]@capacitor[/\\](cli|android)([/\\]|$)/
+    /[/\\]node_modules[/\\]\.cache([/\\]|$)/
   ]
 }
 

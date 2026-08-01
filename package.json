@@ -28,17 +28,13 @@
     "build:pack": "electron-builder --publish never",
     "prebuild:release": "vite build",
     "build:release": "electron-builder --publish always",
-    "cap:copy": "npm run build && npx cap copy",
-    "cap:open": "npm run build && npx cap open android",
     "package": "npm run build && electron-forge package",
     "make": "npm run build && electron-forge make",
     "stage": "npm run build && npx pear stage pear://49x3eqdfgubimdescau51sn7to47c85zkky66mi1kxaxrqpturho",
     "release": "npm run build && npx pear stage pear://49x3eqdfgubimdescau51sn7to47c85zkky66mi1kxaxrqpturho && npx pear release pear://49x3eqdfgubimdescau51sn7to47c85zkky66mi1kxaxrqpturho",
-    "release:github": "node scripts/build-release.js",
     "seed": "npx pear seed pear://49x3eqdfgubimdescau51sn7to47c85zkky66mi1kxaxrqpturho"
   },
   "dependencies": {
-    "@capacitor/core": "^8.4.2",
     "@fontsource/inter": "^5.2.5",
     "@fontsource/jetbrains-mono": "^5.2.5",
     "@hyperswarm/secret-stream": "^6.9.1",
@@ -75,8 +71,6 @@
     "which-runtime": "^1.3.2"
   },
   "devDependencies": {
-    "@capacitor/android": "^8.4.2",
-    "@capacitor/cli": "^8.4.2",
     "@electron-forge/cli": "^7.11.1",
     "@electron-forge/maker-deb": "^7.11.1",
     "@electron-forge/maker-dmg": "^7.11.1",
